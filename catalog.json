@@ -1,0 +1,70 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Телефоны",
+        "description": "связь"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Техника для дома",
+        "description": ""
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "iPhone16",
+        "description": "iphone",
+        "image": "",
+        "category": 1,
+        "price": "100000.00",
+        "created_at": "2025-09-12",
+        "updated_at": "2025-09-12"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Samsung s23",
+        "description": "samsung",
+        "image": "",
+        "category": 1,
+        "price": "90000.00",
+        "created_at": "2025-09-12",
+        "updated_at": "2025-09-12"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "iPhone 15",
+        "description": "iphone",
+        "image": "",
+        "category": 1,
+        "price": "70000.00",
+        "created_at": "2025-09-12",
+        "updated_at": "2025-09-12"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Пылесос LG",
+        "description": "Пылесос",
+        "image": "",
+        "category": 2,
+        "price": "50000.00",
+        "created_at": "2025-09-12",
+        "updated_at": "2025-09-12"
+    }
+}
+]
