@@ -16,7 +16,7 @@ import os
 
 load_dotenv()
 
-from django.conf.global_settings import STATICFILES_DIRS
+from django.conf.global_settings import STATICFILES_DIRS, DEFAULT_AUTO_FIELD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -128,8 +128,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = (BASE_DIR / "static",)
 
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

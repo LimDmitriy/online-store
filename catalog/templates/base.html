@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Online-store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+
+    <header>
+      {% include 'includes/inc_menu.html' %}
+    </header>
+
+
+    <main class="flex-fill">
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{% block page_title %}Online-store{% endblock %}</h1>
+            <p class="lead text-muted">{% block page_description %}Добро пожаловать в Online-store — удобный каталог, где вы найдете товары на любой вкус по доступным ценам.{% endblock %}</p>
+          </div>
+        </div>
+      </section>
+
+      {% block content %}
+      {% endblock %}
+    </main>
+
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container text-center">
+        <ul class="list-unstyled d-flex justify-content-center mb-3">
+          <li class="mx-2">
+            <a href="https://t.me/dima__lim" target="_blank" class="text-white">
+              <i class="bi bi-telegram"></i>
+            </a>
+          </li>
+          <li class="mx-2">
+            <a href="https://www.instagram.com/dima__lim" target="_blank" class="text-white">
+              <i class="bi bi-instagram"></i>
+            </a>
+          </li>
+          <li class="mx-2">
+            <a href="#" target="_blank" class="text-white">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </li>
+        </ul>
+        <p class="mb-1 text-white">Online-store © 2025. Все права защищены.</p>
+        <p class="mb-0 text-white"><a href="{% url 'catalog:home' %}" class="text-white">На главную</a></p>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>
