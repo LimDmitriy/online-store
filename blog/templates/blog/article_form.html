@@ -1,0 +1,53 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h4>{% if object %}Редактировать статью{% else %}Создать статью{% endif %}</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            {{ form.title.label_tag }}
+                            {{ form.title|add_class:"form-control" }}
+                            {% if form.title.help_text %}
+                                <div class="form-text">{{ form.title.help_text }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.content.label_tag }}
+                            {{ form.content|add_class:"form-control" }}
+                            {% if form.content.help_text %}
+                                <div class="form-text">{{ form.content.help_text }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.image.label_tag }}
+                            {{ form.image|add_class:"form-control" }}
+                            {% if form.image.help_text %}
+                                <div class="form-text">{{ form.image.help_text }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success w-50">
+                                {% if object %}Сохранить{% else %}Создать{% endif %}
+                            </button>
+                            <a class="btn btn-secondary w-50 ms-2" href="{% url 'blog:article_list' %}">Назад</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

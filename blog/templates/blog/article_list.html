@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+<div class="mb-4 d-flex justify-content-center">
+    <a class="btn btn-warning btn-lg" href="{% url 'blog:article_create' %}">Создать новую статью</a>
+</div>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for article in object_list %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 rounded-3">
+                    {% if article.image %}
+                    <img src="{{ article.image|media_filter }}" class="card-img-top rounded-top-3" alt="{{ article.title }}">
+                    {% else %}
+                    <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height:200px;">
+                        Изображение отсутствует
+                    </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text text-truncate">{{ article.content }}</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <a href="{% url 'blog:article_detail' article.pk %}" class="btn btn-primary btn-sm">Посмотреть</a>
+                            <small class="text-muted">{{ article.updated_at|date:"d M Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
