@@ -16,7 +16,7 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
 
-	    return Article.objects.filter(published_status=True).order_by('-created_at')
+        return Article.objects.filter(published_status=True).order_by("-created_at")
 
 
 class ArticleDetailView(DetailView):
