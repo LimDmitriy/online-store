@@ -6,7 +6,12 @@
 {% block page_description %}Добро пожаловать в каталог Online-store! Здесь вы найдете разнообразные товары на любой вкус — от бытовой техники и электроники до стильных аксессуаров и подарков. Удобная навигация и подробные карточки товаров помогут быстро найти нужный продукт, а выгодные цены и акции сделают покупки приятными и удобными.{% endblock %}
 {% block content %}
 <div class="mb-4 d-flex justify-content-center">
+  {% if user.is_authenticated %}
   <a class="btn btn-warning" href="{% url 'catalog:product_create' %}">Создать</a>
+  {% else %}
+   <a class="btn btn-warning" href="{% url 'users:login' %}">Войти</a>
+  {% endif %}
+
 </div>
 
 <div class="album py-5 bg-light">
@@ -21,7 +26,9 @@
               <p class="card-text">{{ product.price }} рублей</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
+                  {% if user.is_authenticated %}
                   <a class="btn btn-dark" href="{% url 'catalog:product_detail' product.pk  %}" role="button">Посмотреть</a>
+                  {% endif %}
                 </div>
                 <small class="text-muted">{{ product.updated_at }}</small>
               </div>

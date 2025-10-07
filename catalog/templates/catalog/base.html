@@ -20,7 +20,11 @@
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">{% block page_title %}Online-store{% endblock %}</h1>
+            {% if user.is_authenticated %}
+            <p class="lead text-muted">Добро пожаловать {{ user.email }}</p>
+            {% else %}
             <p class="lead text-muted">{% block page_description %}Добро пожаловать в Online-store — удобный каталог, где вы найдете товары на любой вкус по доступным ценам.{% endblock %}</p>
+            {% endif %}
           </div>
         </div>
       </section>
@@ -50,7 +54,7 @@
           </li>
         </ul>
         <p class="mb-1 text-white">Online-store © 2025. Все права защищены.</p>
-        <p class="mb-0 text-white"><a href="{% url 'catalog:home' %}" class="text-white">На главную</a></p>
+        <p class="mb-0 text-white"><a href="#" class="text-white">На главную</a></p>
       </div>
     </footer>
 

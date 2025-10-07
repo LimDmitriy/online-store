@@ -12,14 +12,6 @@ from catalog.models import Product
 from .forms import ProductForm
 
 
-def home(request):
-    return render(request, "catalog/home.html")
-
-
-def contacts(request):
-    return render(request, "catalog/contacts.html")
-
-
 class ProductListView(ListView):
     model = Product
 
