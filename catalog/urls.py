@@ -5,7 +5,7 @@ from catalog.views import (
     ProductDetailView,
     ProductCreateView,
     ProductUpdateView,
-    ProductDeleteView,
+    ProductDeleteView, ProductModerateView,
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,6 +22,7 @@ urlpatterns = [
     path(
         "catalog/<int:pk>/delete/", ProductDeleteView.as_view(), name="product_delete"
     ),
+    path("<int:pk>/moderate/", ProductModerateView.as_view(), name="product_moderate")
 ]
 
 if settings.DEBUG:

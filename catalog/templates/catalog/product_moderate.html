@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Модерация продукта</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Название:</strong> {{ object.name }}</p>
+                    <p><strong>Категория:</strong> {{ object.category }}</p>
+                    <p><strong>Текущий статус публикации:</strong>
+                        {% if object.is_published %}
+                            <span class="badge bg-success">Опубликован</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Не опубликован</span>
+                        {% endif %}
+                    </p>
+
+                    <hr>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-warning">
+                                {% if object.is_published %}
+                                    Снять с публикации
+                                {% else %}
+                                    Опубликовать
+                                {% endif %}
+                            </button>
+                            <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-secondary">
+                                Назад
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
