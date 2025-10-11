@@ -4,39 +4,44 @@
 {% block title %}Каталог{% endblock %}
 {% block page_title %}Каталог{% endblock %}
 {% block page_description %}Добро пожаловать в каталог Online-store! Здесь вы найдете разнообразные товары на любой вкус — от бытовой техники и электроники до стильных аксессуаров и подарков. Удобная навигация и подробные карточки товаров помогут быстро найти нужный продукт, а выгодные цены и акции сделают покупки приятными и удобными.{% endblock %}
+
 {% block content %}
 <div class="mb-4 d-flex justify-content-center">
-  {% if user.is_authenticated %}
-  <a class="btn btn-warning" href="{% url 'catalog:product_create' %}">Создать</a>
-  {% else %}
-   <a class="btn btn-warning" href="{% url 'users:login' %}">Войти</a>
-  {% endif %}
-
+    {% if user.is_authenticated %}
+    <a class="btn btn-warning" href="{% url 'catalog:product_create' %}">Создать</a>
+    {% else %}
+    <a class="btn btn-warning" href="{% url 'users:login' %}">Войти</a>
+    {% endif %}
 </div>
 
 <div class="album py-5 bg-light">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in object_list %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{ product.image|media_filter}}">
-            <div class="card-body">
-              <p class="card-text">{{ product.name }}</p>
-              <p class="card-text">{{ product.price }} рублей</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  {% if user.is_authenticated %}
-                  <a class="btn btn-dark" href="{% url 'catalog:product_detail' product.pk  %}" role="button">Посмотреть</a>
-                  {% endif %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for product in object_list %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    {% if product.image %}
+                    <img src="{{ product.image|media_filter }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height:200px;">
+                        Нет изображения
+                    </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-truncate">{{ product.description }}</p>
+                        <p class="card-text fw-bold">{{ product.price }} ₽</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-dark btn-sm flex-grow-1 me-1" href="{% url 'catalog:product_detail' product.pk %}">Посмотреть</a>
+                            {% endif %}
+                            <small class="text-muted">{{ product.updated_at|date:"d.m.Y" }}</small>
+                        </div>
+                    </div>
                 </div>
-                <small class="text-muted">{{ product.updated_at }}</small>
-              </div>
             </div>
-          </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-      </div>
     </div>
 </div>
 {% endblock %}

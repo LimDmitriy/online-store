@@ -1,28 +1,42 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
+
 {% block content %}
-<div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{ product.image|media_filter}}">
-            <div class="card-body">
-              <p class="card-text">{{ object.name }}</p>
-              <p class="card-text">{{ object.description }}</p>
-              <p class="card-text">{{ object.price }} рублей</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
-                  <a class="btn btn-secondary" href="{% url 'catalog:product_update' object.pk %}" role="button">Редактировать</a>
-                  <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}" role="button">Удалить</a>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mb-4 shadow-lg">
+                {% if object.image %}
+                <img src="{{ object.image|media_filter }}" class="card-img-top" alt="{{ object.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title">{{ object.name }}</h3>
+                    <p class="card-text">{{ object.description }}</p>
+                    <p class="card-text fw-bold">{{ object.price }} ₽</p>
+
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <a class="btn btn-primary flex-grow-1" href="{% url 'catalog:product_list' %}">Назад</a>
+
+
+                        {% if object.owner == user %}
+                        <a class="btn btn-secondary flex-grow-1" href="{% url 'catalog:product_update' object.pk %}">Редактировать</a>
+                        {% endif %}
+
+
+                        {% if object.owner == user or perms.catalog.can_unpublish_product %}
+                        <a class="btn btn-danger flex-grow-1" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
+                        {% endif %}
+
+
+                        {% if perms.catalog.can_unpublish_product %}
+                        <a class="btn btn-warning flex-grow-1" href="{% url 'catalog:product_moderate' object.pk %}">Модерация</a>
+                        {% endif %}
+                    </div>
+
+                    <small class="text-muted d-block mt-3">Последнее обновление: {{ object.updated_at }}</small>
                 </div>
-                <small class="text-muted">{{ object.updated_at }}</small>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 </div>
 {% endblock %}

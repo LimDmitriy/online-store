@@ -57,3 +57,9 @@ class ProductForm(forms.ModelForm):
                 self.add_error("name", f"Нельзя использовать слово {word}")
                 break
         return cleaned_data
+
+
+class ProductModeratorForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ["is_published"]
