@@ -63,4 +63,3 @@ class ProductModeratorForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ["is_published"]
-
